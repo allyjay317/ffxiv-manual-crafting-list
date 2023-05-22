@@ -1,27 +1,27 @@
-import { Box } from "@mui/material";
-import { ModalStyle, WideModalStyle } from "../../styles";
-import { Modal as MUIModal } from "@mui/material";
-import { ModalHeader } from "./ModalHeader";
+import { Box, Modal as MUIModal } from '@mui/material'
+
+import { ModalHeader } from './ModalHeader'
+import { ModalStyle, WideModalStyle } from '../../styles'
 
 export function Modal({
   children,
-  wide,
-  open,
-  onClose,
   label,
+  onClose,
+  open,
+  wide,
 }: {
-  children: React.ReactNode;
-  wide?: boolean;
-  open: boolean;
-  onClose: () => void;
-  label?: string;
+  children: React.ReactNode
+  wide?: boolean
+  open: boolean
+  onClose: () => void
+  label?: string
 }) {
   return (
-    <MUIModal open={open} onClose={onClose}>
+    <MUIModal onClose={onClose} open={open}>
       <Box sx={wide ? WideModalStyle : ModalStyle}>
         {label && <ModalHeader label={label} />}
         {children}
       </Box>
     </MUIModal>
-  );
+  )
 }

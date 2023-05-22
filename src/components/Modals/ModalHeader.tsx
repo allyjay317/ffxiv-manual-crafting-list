@@ -1,10 +1,11 @@
-import { Typography } from "@mui/material";
-import { ModalHeaderStyle } from "../../styles";
+import { Typography } from '@mui/material'
+
+import { ModalHeaderStyle } from '../../styles'
 
 export function ModalHeader({ label }: { label: string }) {
   return (
-    <Typography variant="h4" sx={ModalHeaderStyle}>
+    <Typography sx={ModalHeaderStyle} variant="h4">
       {label}
     </Typography>
-  );
+  )
 }

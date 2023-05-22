@@ -1,11 +1,11 @@
-import "./App.css";
+import { ModalController } from './components/Modals/ModalController'
+import { MaterialList } from './components/Views/Material/MaterialList'
+import { RecipeList } from './components/Views/Recipe/RecipeList'
+import { RecipeContextProvider } from './context/RecipeContext'
 
-import { RecipeContextProvider } from "./context/RecipeContext";
-import { RecipeList } from "./components/Views/Recipe/RecipeList";
-import { MaterialList } from "./components/Views/Material/MaterialList";
-import { ModalController } from "./components/Modals/ModalController";
+import './App.css'
 
-function App() {
+export function App() {
   return (
     <div className="App">
       <RecipeContextProvider>
@@ -15,7 +15,5 @@ function App() {
         <MaterialList isEditable />
       </RecipeContextProvider>
     </div>
-  );
+  )
 }
-
-export default App;

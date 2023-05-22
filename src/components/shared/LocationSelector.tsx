@@ -1,33 +1,34 @@
-import { InputLabel, SelectChangeEvent } from "@mui/material";
-import { Locations } from "../types";
-import { SelectContainer, SelectLabel, SelectWithLabel } from "./styles";
-import { LOCATIONS } from "../../constants";
-import { Select } from "../Select/Select";
+import { InputLabel, SelectChangeEvent } from '@mui/material'
 
-const id = "location-label";
+import { SelectContainer, SelectLabel, SelectWithLabel } from './styles'
+import { LOCATIONS } from '../../constants'
+import { Select } from '../Select/Select'
+import { Locations } from '../types'
+
+const id = 'location-label'
 
 export function LocationSelector({
-  value,
   onChange,
+  value,
 }: {
-  value: Locations;
-  onChange: (event: SelectChangeEvent<Locations>) => void;
+  value: Locations
+  onChange: (event: SelectChangeEvent<Locations>) => void
 }) {
   return (
     <div style={SelectContainer}>
-      <InputLabel sx={SelectLabel} id={id}>
+      <InputLabel id={id} sx={SelectLabel}>
         Location
       </InputLabel>
 
       <Select
+        label="Location"
         labelId={id}
         name="location"
-        label="Location"
-        value={value}
         onChange={onChange}
-        sx={SelectWithLabel}
         options={LOCATIONS}
+        sx={SelectWithLabel}
+        value={value}
       />
     </div>
-  );
+  )
 }

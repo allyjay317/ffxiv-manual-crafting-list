@@ -1,35 +1,27 @@
-import {
-  Box,
-  Button,
-  Input,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  Typography,
-} from "@mui/material";
-import { Material, Quantified, Recipe } from "../../types";
-import { useRecipeContext } from "../../../context/RecipeContext";
-import { MaterialSelector } from "../../shared/MaterialSelector";
-import { QuantifiedList } from "../../Views/Quantified/QuantifiedList";
-import { namesEqual, namesInequal } from "../../utils";
-import { JOBS } from "../../../constants";
-import { NameField } from "../../shared/NameField";
-import { JobSelector } from "../../shared/JobSelector";
+import { Box, Button, SelectChangeEvent, Typography } from '@mui/material'
+
+import { useRecipeContext } from '../../../context/RecipeContext'
+import { JobSelector } from '../../shared/JobSelector'
+import { MaterialSelector } from '../../shared/MaterialSelector'
+import { NameField } from '../../shared/NameField'
+import { Material, Quantified, Recipe } from '../../types'
+import { namesEqual, namesInequal } from '../../utils'
+import { QuantifiedList } from '../../Views/Quantified/QuantifiedList'
 
 function sortMaterials(a: Quantified<Material>, b: Quantified<Material>) {
-  return a.item.name.localeCompare(b.item.name);
+  return a.item.name.localeCompare(b.item.name)
 }
 
 export function RecipeEditor({
-  recipe,
   handleChange,
   onSubmit,
+  recipe,
 }: {
-  recipe: Recipe;
-  handleChange: (recipe: Recipe) => void;
-  onSubmit: () => void;
+  recipe: Recipe
+  handleChange: (recipe: Recipe) => void
+  onSubmit: () => void
 }) {
-  const { materials } = useRecipeContext();
+  const { materials } = useRecipeContext()
 
   const onChange = <T,>(
     e:
@@ -39,8 +31,8 @@ export function RecipeEditor({
     handleChange({
       ...recipe,
       [e.target.name]: e.target.value as T,
-    });
-  };
+    })
+  }
 
   const addMaterial = (material: Material) => {
     handleChange({
@@ -48,50 +40,50 @@ export function RecipeEditor({
       materials: [...recipe.materials, { item: material, qty: 1 }].sort(
         sortMaterials
       ),
-    });
-  };
+    })
+  }
 
   const onQtyChange = (material: Material, qty: string) => {
-    let numQty = parseInt(qty);
-    if (isNaN(numQty)) numQty = 0;
-    const newMaterials = recipe.materials.filter(namesInequal(material));
-    newMaterials.push({ item: material, qty: numQty });
+    let numQty = parseInt(qty, 10)
+    if (Number.isNaN(numQty)) numQty = 0
+    const newMaterials = recipe.materials.filter(namesInequal(material))
+    newMaterials.push({ item: material, qty: numQty })
     handleChange({
       ...recipe,
       materials: newMaterials.sort(sortMaterials),
-    });
-  };
+    })
+  }
 
   const filteredMaterials = materials.filter(
-    (mat) => !recipe.materials.find(namesEqual(mat))
-  );
+    mat => !recipe.materials.find(namesEqual(mat))
+  )
 
   const onDeleteMaterial = (material: Material) => {
     handleChange({
       ...recipe,
       materials: recipe.materials.filter(namesInequal(material)),
-    });
-  };
+    })
+  }
 
   return (
-    <Box style={{ display: "flex", flexDirection: "column" }}>
+    <Box style={{ display: 'flex', flexDirection: 'column' }}>
       <NameField
-        value={recipe.name}
         onChange={onChange}
         setValidationError={() => {}}
+        value={recipe.name}
       />
-      <JobSelector value={recipe.job} onChange={onChange} />
+      <JobSelector onChange={onChange} value={recipe.job} />
       <Typography>Materials</Typography>
       <MaterialSelector
-        onSelect={(option) => addMaterial(option.value)}
         materials={filteredMaterials}
+        onSelect={option => addMaterial(option.value)}
       />
       <QuantifiedList
         items={recipe.materials}
-        onQtyChange={onQtyChange}
         onDelete={onDeleteMaterial}
+        onQtyChange={onQtyChange}
       />
       <Button onClick={onSubmit}>Submit</Button>
     </Box>
-  );
+  )
 }

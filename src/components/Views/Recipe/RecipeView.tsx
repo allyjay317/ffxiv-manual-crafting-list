@@ -1,29 +1,30 @@
-import { Recipe } from "../../types";
-import { Card, CardContent } from "@mui/material";
-import { useRecipeContext } from "../../../context/RecipeContext";
-import { EditHeader } from "../../shared/EditHeader";
-import { MaterialList } from "../Material/MaterialList";
-import { RecipeViewStyle } from "../../../styles";
+import { Card, CardContent } from '@mui/material'
+
+import { useRecipeContext } from '../../../context/RecipeContext'
+import { RecipeViewStyle } from '../../../styles'
+import { EditHeader } from '../../shared/EditHeader'
+import { Recipe } from '../../types'
+import { MaterialList } from '../Material/MaterialList'
 
 export function RecipeView({
-  recipe,
   isEditable,
+  recipe,
 }: {
-  recipe: Recipe;
-  isEditable?: boolean;
+  recipe: Recipe
+  isEditable?: boolean
 }) {
-  const { setRecipeToEdit } = useRecipeContext();
+  const { setRecipeToEdit } = useRecipeContext()
   return (
-    <Card variant="outlined" sx={RecipeViewStyle}>
+    <Card sx={RecipeViewStyle} variant="outlined">
       <CardContent>
         <EditHeader
-          sx={{ fontSize: 24 }}
-          variant="h1"
-          title={recipe.name}
           onClick={isEditable ? () => setRecipeToEdit(recipe) : undefined}
+          sx={{ fontSize: 24 }}
+          title={recipe.name}
+          variant="h1"
         />
         <MaterialList recipeMaterials={recipe.materials} />
       </CardContent>
     </Card>
-  );
+  )
 }

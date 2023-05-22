@@ -1,13 +1,14 @@
-import { RecipeCreator } from "./RecipeCreator/RecipeCreator";
-import { MaterialCreator } from "./MaterialCreator/MaterialCreator";
-import { useBoolean } from "../../hooks/useBoolean";
-import { Button } from "@mui/material";
-import { CraftingListCreator } from "./CraftingListCreator/CraftingListCreator";
+import { Button } from '@mui/material'
+
+import { CraftingListCreator } from './CraftingListCreator/CraftingListCreator'
+import { MaterialCreator } from './MaterialCreator/MaterialCreator'
+import { RecipeCreator } from './RecipeCreator/RecipeCreator'
+import { useBoolean } from '../../hooks/useBoolean'
 
 export function ModalController() {
-  const [isMaterialCreatorOpen, materialCreator] = useBoolean();
-  const [isRecipeCreatorOpen, recipeCreator] = useBoolean();
-  const [isCraftingListCreatorOpen, craftingListCreator] = useBoolean();
+  const [isMaterialCreatorOpen, materialCreator] = useBoolean()
+  const [isRecipeCreatorOpen, recipeCreator] = useBoolean()
+  const [isCraftingListCreatorOpen, craftingListCreator] = useBoolean()
 
   return (
     <>
@@ -29,5 +30,5 @@ export function ModalController() {
         onClose={craftingListCreator.setFalse}
       />
     </>
-  );
+  )
 }

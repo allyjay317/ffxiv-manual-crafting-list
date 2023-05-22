@@ -1,23 +1,23 @@
-import { LocationSeparatedMaterials } from "../../Modals/CraftingListCreator/LocationSeparatedMaterials";
-import { TabCreator } from "../../Tabs/TabCreator";
-import { Material, Quantified } from "../../types";
-import { MaterialList } from "../Material/MaterialList";
+import { LocationSeparatedMaterials } from '../../Modals/CraftingListCreator/LocationSeparatedMaterials'
+import { TabCreator } from '../../Tabs/TabCreator'
+import { Material, Quantified } from '../../types'
+import { MaterialList } from '../Material/MaterialList'
 
 export function CraftingListView({
   craftingList,
 }: {
-  craftingList: Quantified<Material>[];
+  craftingList: Quantified<Material>[]
 }) {
   const tabs = [
     {
-      name: "All",
       component: <MaterialList recipeMaterials={craftingList} />,
+      name: 'All',
     },
     {
-      name: "Location",
       component: <LocationSeparatedMaterials materials={craftingList} />,
+      name: 'Location',
     },
-  ];
+  ]
 
-  return <TabCreator options={tabs} />;
+  return <TabCreator options={tabs} />
 }

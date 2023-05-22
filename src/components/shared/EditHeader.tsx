@@ -1,41 +1,38 @@
-import { IconButton, Typography } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import CloseIcon from "@mui/icons-material/Close";
-import { useRecipeContext } from "../../context/RecipeContext";
-import { namesEqual } from "../utils";
-import { useMemo } from "react";
+import CloseIcon from '@mui/icons-material/Close'
+import EditIcon from '@mui/icons-material/Edit'
+import { IconButton, Typography } from '@mui/material'
+
+import { useRecipeContext } from '../../context/RecipeContext'
 
 export function EditHeader({
-  title,
   onClick,
+  title,
   ...props
 }: {
-  title: string;
-  onClick?: () => void;
+  title: string
+  onClick?: () => void
 } & React.ComponentProps<typeof Typography>) {
-  const { sx, ...typographyProps } = props;
-  const { recipes, deleteItem } = useRecipeContext();
+  const { sx, ...typographyProps } = props
+  const { deleteItem } = useRecipeContext()
 
   const onDelete = () => {
-    deleteItem(title);
-  };
+    deleteItem(title)
+  }
 
   return (
-    <>
-      <Typography sx={{ textAlign: "center", ...sx }} {...typographyProps}>
-        {title}
-        {onClick && (
-          <>
-            <IconButton onClick={onClick}>
-              <EditIcon />
-            </IconButton>
+    <Typography sx={{ textAlign: 'center', ...sx }} {...typographyProps}>
+      {title}
+      {onClick && (
+        <>
+          <IconButton onClick={onClick}>
+            <EditIcon />
+          </IconButton>
 
-            <IconButton onClick={onDelete}>
-              <CloseIcon />
-            </IconButton>
-          </>
-        )}
-      </Typography>
-    </>
-  );
+          <IconButton onClick={onDelete}>
+            <CloseIcon />
+          </IconButton>
+        </>
+      )}
+    </Typography>
+  )
 }

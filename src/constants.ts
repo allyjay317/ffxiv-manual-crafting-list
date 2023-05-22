@@ -1,18 +1,18 @@
-import { GatheringJobs, Locations, SelectOption } from "./components/types";
-import { selectOptionSort } from "./utils";
+import { GatheringJobs, Locations, SelectOption } from './components/types'
+import { selectOptionSort } from './utils'
 
 export const defaultMaterial = {
-  name: "",
   job: GatheringJobs.Botanist,
   location: Locations.Labyrinthos,
-  time: "",
+  name: '',
   recipe: undefined,
-};
+  time: '',
+}
 
 export const JOBS: SelectOption<GatheringJobs>[] = Object.entries(GatheringJobs)
   .map(([label, value]) => ({ label, value }))
-  .sort(selectOptionSort);
+  .sort(selectOptionSort)
 
 export const LOCATIONS: SelectOption<Locations>[] = Object.entries(Locations)
   .map(([label, value]) => ({ label, value }))
-  .sort(selectOptionSort);
+  .sort(selectOptionSort)

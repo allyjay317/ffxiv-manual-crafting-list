@@ -1,44 +1,43 @@
-import { Box, Modal } from "@mui/material";
-import { ModalStyle } from "../../../styles";
-import { RecipeEditor } from "./RecipeEditor";
-import { useEffect, useState } from "react";
-import { Recipe } from "../../types";
-import { useRecipeContext } from "../../../context/RecipeContext";
-import { defaultRecipe } from "./RecipeCreator";
+import { Box, Modal } from '@mui/material'
+import { useEffect, useState } from 'react'
+
+import { defaultRecipe } from './RecipeCreator'
+import { RecipeEditor } from './RecipeEditor'
+import { useRecipeContext } from '../../../context/RecipeContext'
+import { ModalStyle } from '../../../styles'
+import { Recipe } from '../../types'
 
 export function EditRecipeModal({
   isOpen,
   onClose,
 }: {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen: boolean
+  onClose: () => void
 }) {
-  const { recipeToEdit, updateRecipe } = useRecipeContext();
-  const [recipe, setRecipe] = useState<Recipe>(
-    recipeToEdit ? recipeToEdit : defaultRecipe
-  );
+  const { recipeToEdit, updateRecipe } = useRecipeContext()
+  const [recipe, setRecipe] = useState<Recipe>(recipeToEdit || defaultRecipe)
 
   useEffect(() => {
     if (recipeToEdit) {
-      setRecipe(recipeToEdit);
+      setRecipe(recipeToEdit)
     }
-  }, [isOpen, recipeToEdit]);
+  }, [isOpen, recipeToEdit])
 
   const onSubmit = () => {
-    if (!recipeToEdit) return;
-    updateRecipe(recipeToEdit, recipe);
-    onClose();
-  };
+    if (!recipeToEdit) return
+    updateRecipe(recipeToEdit, recipe)
+    onClose()
+  }
 
   return (
-    <Modal open={isOpen} onClose={onClose}>
+    <Modal onClose={onClose} open={isOpen}>
       <Box sx={ModalStyle}>
         <RecipeEditor
-          recipe={recipe}
           handleChange={setRecipe}
           onSubmit={onSubmit}
+          recipe={recipe}
         />
       </Box>
     </Modal>
-  );
+  )
 }

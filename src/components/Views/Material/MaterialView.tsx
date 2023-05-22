@@ -1,24 +1,25 @@
-import { Locations, Material } from "../../types";
-import { Card, Table, TableCell, TableRow } from "@mui/material";
-import { useRecipeContext } from "../../../context/RecipeContext";
-import { MaterialViewStyle } from "../../../styles";
-import { EditHeader } from "../../shared/EditHeader";
+import { Card, Table, TableCell, TableRow } from '@mui/material'
+
+import { useRecipeContext } from '../../../context/RecipeContext'
+import { MaterialViewStyle } from '../../../styles'
+import { EditHeader } from '../../shared/EditHeader'
+import { Locations, Material } from '../../types'
 
 export function MaterialView({
+  isEditable,
   material,
   qty,
-  isEditable,
 }: {
-  material: Material;
-  qty?: number;
-  isEditable?: boolean;
+  material: Material
+  qty?: number
+  isEditable?: boolean
 }) {
-  const { setMaterialToEdit } = useRecipeContext();
+  const { setMaterialToEdit } = useRecipeContext()
   return (
-    <Card variant="outlined" sx={MaterialViewStyle}>
+    <Card sx={MaterialViewStyle} variant="outlined">
       <EditHeader
-        title={material.name}
         onClick={isEditable ? () => setMaterialToEdit(material) : undefined}
+        title={material.name}
       />
       <Table>
         <TableRow>
@@ -42,5 +43,5 @@ export function MaterialView({
         )}
       </Table>
     </Card>
-  );
+  )
 }

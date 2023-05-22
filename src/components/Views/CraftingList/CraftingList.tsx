@@ -1,3 +1,3 @@
 export function CraftingLists() {
-  return <div>his</div>;
+  return <div>his</div>
 }
